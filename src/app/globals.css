@@ -1,0 +1,180 @@
+@import "tailwindcss";
+
+/* --------------------------------------------------------------------------
+   SUBSTOR Design System v1 - tokens
+   Source: SUBSTOR-Design-System.pdf (Latentia Labs, 7 September 2026).
+
+   The palette is the system's, unchanged. The display face is not: a
+   high-contrast serif fights the industrial register this page is after, so
+   display type is set in the panel's own 5 x 7 dot font instead. Inter still
+   carries everything functional, exactly as the system specifies.
+   -------------------------------------------------------------------------- */
+
+:root {
+  /* Surfaces */
+  --background: #f6f1e6;
+  --surface: #fffcf6;
+  --surface-alt: #efe7d5;
+  --border: #e4dac0;
+
+  /* Text */
+  --foreground: #26201a;
+  --muted: #6f6757;
+  --accent-foreground: #fffaf3;
+  --accent-soft: #f1ddc0;
+
+  /* Accent and semantic */
+  --accent: #ac5634;
+  --accent-hover: #9e4b2b;
+  --secondary: #435c42;
+  --secondary-soft: #dfe6d3;
+
+  /* ---------------------------------------------------------------------
+     The dark chapter.
+
+     One section runs on a warm near-black, because an LED panel only reads
+     against one. These stay inside the system's warm hue family: ink is the
+     foreground pushed down, on-ink is the background pushed up.
+
+     On cream the accent is terracotta pigment. On ink it is terracotta
+     light, which is accent-soft: #ac5634 on ink measures 3.1:1 and would
+     fail AA for normal text, while accent-soft clears it at 14:1.
+     --------------------------------------------------------------------- */
+  --ink: #16110d;
+  --ink-raised: #211a14;
+  --ink-border: #3a2f26;
+  --on-ink: #f2ece0;
+  --on-ink-muted: #a2937f;
+  --on-ink-accent: #f1ddc0;
+
+  /* Radius, as a two-value rule: anything you can touch is a full pill,
+     anything you only look at is square. The system's "round buttons and tags
+     fully" holds; its 16px cards do not, because a soft card undercuts the
+     drawn-grid register the rest of the page is built on. */
+  --radius-interactive: 9999px;
+  --radius-surface: 0px;
+
+  /* Elevation. Two layers, tinted to the hue behind them. Hover only. */
+  --shadow-card-hover: 0 2px 6px -3px rgb(38 32 24 / 0.16),
+    0 18px 40px -26px rgb(38 32 24 / 0.4);
+  --shadow-accent-hover: 0 2px 5px -2px rgb(172 86 52 / 0.4),
+    0 12px 28px -12px rgb(172 86 52 / 0.7);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
+  --color-border: var(--border);
+
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-soft: var(--accent-soft);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-secondary: var(--secondary);
+  --color-secondary-soft: var(--secondary-soft);
+
+  --color-ink: var(--ink);
+  --color-ink-raised: var(--ink-raised);
+  --color-ink-border: var(--ink-border);
+  --color-on-ink: var(--on-ink);
+  --color-on-ink-muted: var(--on-ink-muted);
+  --color-on-ink-accent: var(--on-ink-accent);
+
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+
+  /* Wider than the system's 1152px. The product is the argument on this
+     page, and it needs the room to be shown at size. */
+  --spacing-container: 1360px;
+}
+
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* Mandatory for any figure compared across columns or updating in place. */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+::selection {
+  background-color: var(--accent-soft);
+  color: var(--foreground);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   Grain. 4% over the whole page so the flat cream never reads as sterile.
+   Fixed and pointer-events-none so it never repaints on scroll.
+   -------------------------------------------------------------------------- */
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* --------------------------------------------------------------------------
+   Hero load-in.
+
+   CSS rather than the JavaScript reveal used further down: the wordmark is
+   the largest paint on the page, and holding it at opacity 0 under
+   JavaScript control would delay that paint until hydration.
+   -------------------------------------------------------------------------- */
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .enter {
+    animation: enter 700ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  }
+}

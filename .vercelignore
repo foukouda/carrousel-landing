@@ -1,0 +1,28 @@
+# Ce qui ne doit jamais quitter cette machine.
+#
+# Vercel se rabat sur .gitignore quand ce fichier est absent, mais il n'y a pas
+# de depot git ici, donc rien ne serait filtre sans cette liste.
+
+# Secrets. Les variables se declarent dans Settings > Environment Variables,
+# jamais dans un fichier envoye au build.
+.env
+.env.*
+!.env.example
+
+# Donnees personnelles : ancien stockage fichier et exports CSV.
+.data
+*.csv
+
+# Reconstruits par Vercel
+node_modules
+.next
+
+# Inutile au build
+.git
+.vscode
+.idea
+*.log
+tsconfig.tsbuildinfo
+Dockerfile
+docker-compose.yml
+.dockerignore

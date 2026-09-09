@@ -1,0 +1,32 @@
+# Keeps the build context small and, more importantly, keeps secrets and
+# personal data out of the image. Everything here would otherwise be copied in
+# by the `COPY . .` in the builder stage.
+
+node_modules
+.next
+.git
+.github
+
+# Secrets. An .env baked into an image is an .env you have published.
+.env
+.env.*
+!.env.example
+
+# Personal data from the old file-based store, and any CSV export.
+.data
+*.csv
+
+# Local noise
+.DS_Store
+Thumbs.db
+*.log
+.vscode
+.idea
+tsconfig.tsbuildinfo
+next-env.d.ts
+
+# Not needed to build or run the server
+README.md
+Dockerfile
+docker-compose.yml
+.dockerignore

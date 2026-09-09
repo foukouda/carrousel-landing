@@ -1,0 +1,49 @@
+# Local development with the same engine Supabase runs.
+#
+#   docker compose up --build
+#   docker compose exec web npm run db:migrate
+#   -> http://localhost:3000
+#
+# Postgres here is a throwaway for development. Production data lives in
+# Supabase; this stack never touches it.
+
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: carrousel
+      POSTGRES_PASSWORD: carrousel
+      POSTGRES_DB: carrousel
+    ports:
+      # Exposed so you can run `npm run db:migrate` from the host too, or point
+      # a database client at it.
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      # The web container waits for this, otherwise it starts before Postgres
+      # is accepting connections and the first request fails.
+      test: ["CMD-SHELL", "pg_isready -U carrousel -d carrousel"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      # No sslmode: this Postgres is on the compose network, not the internet.
+      DATABASE_URL: postgres://carrousel:carrousel@db:5432/carrousel
+      UNSUBSCRIBE_SECRET: ${UNSUBSCRIBE_SECRET:-development-only-secret-not-for-production-use}
+      NODE_ENV: production
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db-data:
