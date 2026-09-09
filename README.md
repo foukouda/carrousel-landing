@@ -250,12 +250,20 @@ le pied de page de chaque page.
 
 ### À faire avant la mise en ligne
 
-**Remplis les `{{TODO}}` de [legal.ts](src/lib/legal.ts).** Ils s'affichent
-surlignés en terracotta sur les pages — impossible de les rater. Il en reste
-14 : raison sociale, forme juridique, adresse du siège, SIREN/RCS, TVA,
-directeur de publication, hébergeur, adresse de contact RGPD, et le prestataire
-d'envoi d'emails que tu choisiras. Je ne les ai pas inventés : un numéro RCS
-plausible mais faux sur une page légale est pire qu'un trou visible.
+**Un seul `{{TODO}}` reste dans [legal.ts](src/lib/legal.ts)** : le prestataire
+d'envoi d'emails, que tu n'as pas encore choisi. Il s'affiche surligné en
+terracotta sur `/privacy`, impossible de le rater.
+
+Les mentions sont écrites pour la situation réelle : **Serein Design n'est pas
+immatriculé**, donc l'éditeur est une personne physique et il n'y a ni SIREN,
+ni capital, ni numéro de TVA à déclarer. C'est dit en toutes lettres sur la
+page plutôt que laissé vide, avec une section qui annonce l'immatriculation
+avant l'ouverture de la campagne.
+
+> **Avant d'ouvrir le Kickstarter, il faudra immatriculer.** Encaisser de
+> l'argent est une activité commerciale : à ce moment-là les mentions
+> complètes deviennent obligatoires, et cette page devra porter la
+> dénomination, la forme juridique, le siège, le SIREN et la TVA.
 
 **Choisis la région Supabase en Europe.** Voir la section 1. Irréversible.
 

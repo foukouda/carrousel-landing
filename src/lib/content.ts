@@ -26,7 +26,7 @@ export const links = {
   discord: "", // TODO: paste the Discord invite URL.
   kickstarter: "", // TODO: paste the Kickstarter pre-launch URL once it exists.
   github: "", // TODO: paste the repository URL once the code is published.
-  contact: "hello@sereindesign.com", // TODO: confirm the public contact address.
+  contact: "hello@sereindesign.com",
 } as const;
 
 /**
