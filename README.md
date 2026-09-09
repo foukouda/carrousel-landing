@@ -430,3 +430,5 @@ adresse email. Sont donc réservés à la page Kickstarter elle-même :
 - La section risques et défis dans son intégralité.
 
 Ils restent utiles et ne sont pas perdus : ils vivent dans le brief d'origine.
+
+<!-- deploiement declenche par git push -->
