@@ -4,9 +4,9 @@ import { motion, useReducedMotion } from "motion/react";
 import type { ReactNode } from "react";
 
 /**
- * Scroll reveal, exactly as specified by the design system: opacity 0 to 1,
- * translateY 22px to 0, on a critically damped spring so it settles with
- * weight and never overshoots. Fires once, 80px before entering the viewport.
+ * Scroll reveal: opacity 0 to 1 and translateY 22px to 0, on a critically
+ * damped spring so it settles with weight and never overshoots. Fires once,
+ * 80px before entering the viewport.
  */
 
 const SPRING = { type: "spring", stiffness: 100, damping: 20, mass: 1 } as const;

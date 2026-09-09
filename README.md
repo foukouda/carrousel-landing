@@ -9,31 +9,32 @@ Le langage visuel s'inspire de **nothing.tech** : typo dot-matrix en display,
 produit géant sur fond plat, étiquettes techniques en majuscules espacées,
 grille stricte tracée à la hairline, beaucoup de vide.
 
-La **palette reste celle du SUBSTOR Design System v1**, inchangée : fond cream
-`#f6f1e6`, accent terracotta unique `#ac5634`, sage réservé au sémantique
-« validé ». Les tokens sont dans [globals.css](src/app/globals.css) — c'est le
-seul endroit où les changer.
+La palette : fond cream `#f6f1e6` jamais blanc pur, texte noir chaud jamais
+noir pur, **un seul accent** terracotta `#ac5634` qui porte toutes les actions,
+et le sage réservé au sémantique « validé », jamais décoratif. Pas de troisième
+accent, pas de bleu. Les tokens sont dans [globals.css](src/app/globals.css) —
+c'est le seul endroit où les changer.
 
-Trois écarts assumés par rapport à la charte, tous documentés dans le CSS :
+Trois partis pris, tous documentés dans le CSS :
 
-1. **Fraunces est retiré.** Un serif éditorial se bat avec le registre
-   industriel de cette page. Le display est désormais composé dans la police
-   bitmap 5×7 du panneau lui-même ([dot-font.ts](src/lib/dot-font.ts)), rendue
-   en SVG par [DotMatrixText](src/components/dot-matrix-text.tsx). Inter reste
-   sur tout le fonctionnel, comme la charte le prévoit.
+1. **Pas de serif.** Un serif éditorial se bat avec le registre industriel de
+   cette page. Le display est composé dans la police bitmap 5×7 du panneau
+   lui-même ([dot-font.ts](src/lib/dot-font.ts)), rendue en SVG par
+   [DotMatrixText](src/components/dot-matrix-text.tsx) : les titres du site
+   utilisent la fonte du produit, et aucune webfont n'est chargée pour eux.
+   Inter porte tout le fonctionnel.
 2. **Rayons en deux valeurs.** Ce qui se touche est une pilule, ce qui se
-   regarde est à angle vif. La charte impose les boutons ronds, elle est
-   respectée ; ses cartes à 16px ne le sont pas, une carte molle affaiblissant
-   la grille dessinée.
+   regarde est à angle vif. Les cartes à coins doux ont été essayées puis
+   abandonnées : elles affaiblissent la grille dessinée.
 3. **Un chapitre sombre**, une seule fois sur la page, pour la section des
    applications. Un écran LED ne se lit que sur un fond sombre. Les tokens
-   `ink` restent dans la famille chaude de la charte, et l'accent y devient
+   `ink` restent dans la même famille chaude, et l'accent y devient
    `accent-soft` : le terracotta sur fond sombre mesure 3.1:1 et échouerait
    l'AA, `accent-soft` passe à 14:1.
 
 **Le tricolore** apparaît partout où la page revendique une fabrication
-française. La charte interdit un troisième accent et interdit le bleu ; ce
-n'est pas un accent mais un emblème, cantonné à cette revendication, qui ne
+française. La règle du seul accent et l'exclusion du bleu tiennent toujours :
+ce n'est pas un accent mais un emblème, cantonné à cette revendication, qui ne
 colore jamais du texte, une bordure ou un état interactif. Il vit dans
 [french-mark.tsx](src/components/french-mark.tsx).
 

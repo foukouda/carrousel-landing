@@ -4,7 +4,7 @@ import { ImageSquare } from "@phosphor-icons/react/dist/ssr";
 /**
  * A photograph that does not exist yet.
  *
- * The design system's rule: anything unverified ships as a visible placeholder
+ * The rule: anything unverified ships as a visible placeholder
  * rather than a plausible guess. Dropping a random stock image into a product
  * page is exactly the plausible guess it warns against, so an empty slot names
  * the shot it is waiting for instead.

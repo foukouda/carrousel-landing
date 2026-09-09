@@ -1,7 +1,7 @@
 /**
  * The tricolour, used wherever the page claims French manufacturing.
  *
- * The design system forbids a third accent and forbids blue outright. This
+ * The palette allows no third accent and no blue. This
  * does not break that rule, because it is not an accent: it is an emblem,
  * scoped to the one claim it belongs to, and it never colours type, borders
  * or interactive states. Treat it the way you would a certification stamp.

@@ -1,13 +1,22 @@
 @import "tailwindcss";
 
 /* --------------------------------------------------------------------------
-   SUBSTOR Design System v1 - tokens
-   Source: SUBSTOR-Design-System.pdf (Latentia Labs, 7 September 2026).
+   Serein Design - tokens
 
-   The palette is the system's, unchanged. The display face is not: a
-   high-contrast serif fights the industrial register this page is after, so
-   display type is set in the panel's own 5 x 7 dot font instead. Inter still
-   carries everything functional, exactly as the system specifies.
+   This file is the only place the palette is defined. Change a value here,
+   never inline.
+
+   The rules it follows, in short:
+   - A warm cream ground, never pure white, and warm near-black text, never
+     pure black.
+   - One accent. Terracotta carries every call to action. Sage is semantic
+     only: it means "checked", never decoration. No third accent and no blue.
+   - Anything you can touch is a full pill; anything you only look at is
+     square-cornered.
+   - Shadows are two-layered and tinted to the hue behind them, and appear on
+     hover only. A resting element is defined by its border.
+   - Display type is set in the panel's own 5 x 7 dot font rather than a
+     webfont. Inter carries everything functional.
    -------------------------------------------------------------------------- */
 
 :root {
@@ -33,7 +42,7 @@
      The dark chapter.
 
      One section runs on a warm near-black, because an LED panel only reads
-     against one. These stay inside the system's warm hue family: ink is the
+     against one. These stay inside the same warm hue family: ink is the
      foreground pushed down, on-ink is the background pushed up.
 
      On cream the accent is terracotta pigment. On ink it is terracotta
@@ -48,9 +57,9 @@
   --on-ink-accent: #f1ddc0;
 
   /* Radius, as a two-value rule: anything you can touch is a full pill,
-     anything you only look at is square. The system's "round buttons and tags
-     fully" holds; its 16px cards do not, because a soft card undercuts the
-     drawn-grid register the rest of the page is built on. */
+     anything you only look at is square. Soft-cornered cards were tried and
+     dropped: they undercut the drawn-grid register the rest of the page is
+     built on. */
   --radius-interactive: 9999px;
   --radius-surface: 0px;
 
@@ -86,7 +95,7 @@
 
   --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
 
-  /* Wider than the system's 1152px. The product is the argument on this
+  /* Deliberately wide. The product is the argument on this
      page, and it needs the room to be shown at size. */
   --spacing-container: 1360px;
 }
