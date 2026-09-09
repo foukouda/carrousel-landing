@@ -70,17 +70,29 @@ absente = échec visible, en local comme en production.
    > La région ne se change pas après coup. C'est la décision RGPD la plus
    > importante ici, et la seule irréversible.
 
-3. **Connect** (en haut) → onglet **Session pooler** ou bouton **ORMs**. Copie
-   la connection string. Elle ressemble à :
+3. Bouton **Connect** en haut de la page, onglet **Transaction pooler**.
+
+   Supabase propose trois chaînes, et une seule convient ici :
+
+   | Onglet | Port | Verdict |
+   | --- | --- | --- |
+   | Direct connection | 5432 | **Non.** Une connexion par requête ; sur Vercel la limite Postgres saute dès que le trafic monte. |
+   | **Transaction pooler** | **6543** | **Oui.** Conçu pour le serverless. |
+   | Session pooler | 5432 | Fonctionne, mais garde une connexion ouverte par session. Inutilement coûteux. |
+
+   La chaîne ressemble à :
 
    ```
    postgresql://postgres.abcdefgh:MOTDEPASSE@aws-0-eu-west-3.pooler.supabase.com:6543/postgres
    ```
 
-   > **Prends bien l'URL du pooler, pas la connexion directe.** Sur Vercel
-   > chaque requête est un processus séparé : avec la connexion directe
-   > (`db.xxx.supabase.co`, port 5432) tu épuises la limite de connexions de
-   > Postgres dès que le trafic monte. Le pooler existe exactement pour ça.
+   Remplace `[YOUR-PASSWORD]` par le mot de passe choisi à la création du
+   projet. Oublié ? **Settings → Database → Reset database password**.
+
+   > Le code est déjà configuré pour ce mode : `prepare: false` dans
+   > [db.ts](src/lib/db.ts). Le pooler en mode transaction ne supporte pas les
+   > requêtes préparées nommées, et sans ce réglage les erreurs n'apparaissent
+   > que sous charge, une fois les connexions réutilisées.
 
 4. Copie `.env.example` vers `.env.local`, colle l'URL dans `DATABASE_URL`,
    puis génère le secret de désinscription (la commande est dans le fichier).
@@ -431,4 +443,3 @@ adresse email. Sont donc réservés à la page Kickstarter elle-même :
 
 Ils restent utiles et ne sont pas perdus : ils vivent dans le brief d'origine.
 
-<!-- deploiement declenche par git push -->
